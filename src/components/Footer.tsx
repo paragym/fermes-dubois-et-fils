@@ -25,9 +25,9 @@ export function Footer() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo & tagline */}
           <div className="flex flex-col items-start gap-4">
-            <div className="bg-white p-2">
-              <Logo size={80} />
-            </div>
+            <div className="bg-white rounded-md p-3 inline-block">
+                          <Logo size={72} />
+                        </div>
             <p className="text-sm text-blue-200 italic">{t("footer.tagline")}</p>
           </div>
 

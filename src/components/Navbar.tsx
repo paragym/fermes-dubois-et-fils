@@ -58,11 +58,11 @@ export function Navbar() {
       <div className="flex justify-center items-center py-3 sm:py-4 border-b border-border">
         <Link href="/" data-testid="logo-link" className="block">
           <span className="block sm:hidden">
-            <Logo size={80} />
-          </span>
-          <span className="hidden sm:block">
-            <Logo size={110} />
-          </span>
+                      <Logo size={72} />
+                    </span>
+                    <span className="hidden sm:block">
+                      <Logo size={96} />
+                    </span>
         </Link>
       </div>
 
