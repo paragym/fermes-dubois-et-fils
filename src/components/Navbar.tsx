@@ -32,7 +32,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="bg-white border-b border-border sticky top-0 z-50 shadow-sm">
+    <header className="bg-[#faf8f4] border-b border-border sticky top-0 z-50 shadow-sm">
       {/* Top bar */}
       <div className="bg-[#003087] text-white text-[10px] sm:text-xs py-1.5 px-3 sm:px-4 flex justify-between items-center gap-2">
         <span className="font-medium tracking-wider uppercase truncate">{t("hero.badge")}</span>
@@ -54,20 +54,58 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Logo center */}
-      <div className="flex justify-center items-center py-3 sm:py-4 border-b border-border">
-        <Link href="/" data-testid="logo-link" className="block">
+      {/* Brand bar: large centered logo + mobile menu */}
+      <div className="relative flex items-center justify-center px-3 sm:px-6 py-3 sm:py-5">
+        <Link
+          href="/"
+          data-testid="logo-link"
+          className="block bg-transparent p-0 m-0 border-0 shadow-none"
+          aria-label="Fermes Dubois et fils"
+        >
+          {/* Mobile: large enough for wordmark to read */}
           <span className="block sm:hidden">
-                      <Logo size={72} />
-                    </span>
-                    <span className="hidden sm:block">
-                      <Logo size={96} />
-                    </span>
+            <Logo size={108} />
+          </span>
+          {/* Tablet+ */}
+          <span className="hidden sm:block lg:hidden">
+            <Logo size={120} />
+          </span>
+          {/* Desktop */}
+          <span className="hidden lg:block">
+            <Logo size={132} />
+          </span>
         </Link>
+
+        {/* Mobile menu button — absolute so logo stays truly centered */}
+        <button
+          data-testid="mobile-menu-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          className="lg:hidden absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-2.5 text-[#003087] hover:text-[#C8102E] transition-colors bg-transparent"
+        >
+          <motion.span
+            animate={{ rotate: menuOpen ? 90 : 0, scale: menuOpen ? 0 : 1, opacity: menuOpen ? 0 : 1 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <Menu size={26} />
+          </motion.span>
+          <motion.span
+            animate={{ rotate: menuOpen ? 0 : -90, scale: menuOpen ? 1 : 0, opacity: menuOpen ? 1 : 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <X size={26} />
+          </motion.span>
+          <span className="invisible block w-6 h-6">
+            <Menu size={26} />
+          </span>
+        </button>
       </div>
 
-      {/* Nav links */}
-      <nav className="hidden lg:flex justify-center gap-0 bg-white">
+      {/* Desktop nav links */}
+      <nav className="hidden lg:flex justify-center gap-0 bg-[#faf8f4] border-t border-border">
         {navLinks.map((link) => (
           <Link
             key={link.href}
@@ -84,37 +122,7 @@ export function Navbar() {
         ))}
       </nav>
 
-      {/* Mobile menu button */}
-      <div className="lg:hidden flex items-center justify-between px-4 py-2 border-t border-border">
-        <span className="text-sm font-bold text-[#003087] uppercase tracking-wider">{t("common.menu")}</span>
-        <button
-          data-testid="mobile-menu-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          className="relative p-2 text-[#003087] hover:text-[#C8102E] transition-colors"
-        >
-          <motion.span
-            animate={{ rotate: menuOpen ? 90 : 0, scale: menuOpen ? 0 : 1, opacity: menuOpen ? 0 : 1 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            <Menu size={22} />
-          </motion.span>
-          <motion.span
-            animate={{ rotate: menuOpen ? 0 : -90, scale: menuOpen ? 1 : 0, opacity: menuOpen ? 1 : 0 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            <X size={22} />
-          </motion.span>
-          <span className="invisible block">
-            <Menu size={22} />
-          </span>
-        </button>
-      </div>
-
-      {/* Mobile nav */}
+      {/* Mobile nav drawer */}
       <AnimatePresence initial={false}>
         {menuOpen && (
           <motion.nav
@@ -123,7 +131,7 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden bg-white border-t border-border overflow-hidden shadow-lg"
+            className="lg:hidden bg-[#faf8f4] border-t border-border overflow-hidden shadow-lg"
           >
             <div className="flex flex-col">
               {navLinks.map((link, i) => (
@@ -140,7 +148,7 @@ export function Navbar() {
                     className={`block px-6 py-3.5 text-sm font-semibold tracking-wider uppercase border-l-4 transition-colors ${
                       isActive(link.href)
                         ? "border-[#C8102E] text-[#C8102E] bg-red-50"
-                        : "border-transparent text-[#003087] hover:border-[#C8102E] hover:bg-gray-50 active:bg-gray-100"
+                        : "border-transparent text-[#003087] hover:border-[#C8102E] hover:bg-white/70 active:bg-white"
                     }`}
                   >
                     {t(link.key)}
