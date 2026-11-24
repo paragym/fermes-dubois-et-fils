@@ -13,7 +13,7 @@ export default function ShareButtons({ variant = "dark", testIdPrefix = "share" 
   const { t, lang } = useLanguage();
   const [copied, setCopied] = useState(false);
 
-  const url = typeof window !== "undefined" ? window.location.origin : "https://fermesduboisetfils.ca";
+  const url = typeof window !== "undefined" ? window.location.origin : "https://fermes-dubois-et-fils-production-f7f3.up.railway.app";
   const shareText =
     lang === "fr"
       ? "Fermes Dubois et fils — Viande de Chien Bio du Québec. Élevés en plein air depuis 1987."
